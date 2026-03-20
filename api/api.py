@@ -11,8 +11,9 @@ app = FastAPI(title="Battery Dashboard API")
 # We will mount it at the end to catch all roots, but let's mount /static explicitly
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-BATTERY_DATA_FILE = "battery_data.json"
-SETTINGS_FILE = "settings.json"
+BASE_DIR = os.path.dirname(__file__)  # api/ folder
+BATTERY_DATA_FILE = os.path.join(BASE_DIR, "../battery_data.json")
+SETTINGS_FILE = os.path.join(BASE_DIR, "../settings.json")
 
 def load_battery_data():
     if not os.path.exists(BATTERY_DATA_FILE):
